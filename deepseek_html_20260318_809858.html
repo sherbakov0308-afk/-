@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ Профиль | Репетитор AI — обновленный</title>
+    <!-- Font Awesome for icons (slider arrows, etc.) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: #f4f7fc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 16px 30px;
+        }
+
+        /* ЦВЕТНАЯ ШАПКА (верхний колонтитул) */
+        .colored-header {
+            width: 100%;
+            background: linear-gradient(135deg, #162b38 0%, #1d4e5f 70%, #2a6b7c 100%);
+            padding: 18px 0;
+            margin-bottom: 32px;
+            box-shadow: 0 6px 16px rgba(0,40,50,0.2);
+            border-bottom: 4px solid #FFB347;
+        }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: white;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo-icon {
+            background: #FFB347;
+            width: 48px;
+            height: 48px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #162b38;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .logo-text {
+            font-weight: 700;
+            font-size: 22px;
+            letter-spacing: -0.3px;
+        }
+        .header-menu span {
+            margin-left: 28px;
+            font-weight: 500;
+            opacity: 0.9;
+            cursor: default;
+            font-size: 16px;
+            border-bottom: 2px solid transparent;
+        }
+        .header-menu span i {
+            margin-right: 6px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* баннер "План на любой балл" */
+        .plan-banner {
+            background: linear-gradient(98deg, #1A2A3A 0%, #1f3a4b 100%);
+            border-radius: 32px;
+            padding: 28px 36px;
+            margin-bottom: 32px;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 20px 30px -8px rgba(0,40,70,0.2);
+        }
+
+        .plan-text h2 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 8px;
+        }
+
+        .plan-text p {
+            font-size: 16px;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .plan-text p i {
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: #FFD600;
+            color: #1A2A3A;
+            border: none;
+            padding: 16px 36px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-primary:hover {
+            background: #ffc800;
+            transform: scale(1.02);
+        }
+
+        /* секция с номерами заданий (теперь 19 штук) */
+        .tasks-section {
+            background: white;
+            border-radius: 40px;
+            padding: 32px 36px;
+            margin-bottom: 32px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.04);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .section-header h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .badge {
+            background: #EFF2F7;
+            border-radius: 40px;
+            padding: 8px 22px;
+            font-weight: 500;
+            color: #2c3e4f;
+            font-size: 15px;
+        }
+
+        .numbers-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+            align-items: center;
+        }
+
+        .number-item {
+            width: 48px;
+            height: 48px;
+            background: #F0F4FA;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 18px;
+            color: #1f3a4b;
+            transition: all 0.15s ease;
+            border: 1px solid transparent;
+            cursor: default;
+        }
+
+        /* при наведении кнопка ПОДУВЕЛИЧИВАЕТСЯ (scale) */
+        .number-item:hover {
+            transform: scale(1.15);
+            background: #dae3ef;
+            box-shadow: 0 6px 12px rgba(0,30,50,0.15);
+        }
+
+        .number-item.active {
+            background: #1A2A3A;
+            color: white;
+            box-shadow: 0 6px 12px rgba(0,40,70,0.2);
+        }
+
+        .number-item.active:hover {
+            background: #14232f;
+            transform: scale(1.15);
+        }
+
+        .type-selector {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .type-tag {
+            background: #E9EDF2;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1e2b38;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .type-tag i {
+            color: #667c8c;
+        }
+
+        /* карточки подборок */
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: 40px 0 32px;
+        }
+
+        .card {
+            background: #F9FAFD;
+            border-radius: 32px;
+            padding: 26px 24px;
+            transition: 0.2s;
+            border: 1px solid #eef2f6;
+        }
+
+        .card:hover {
+            background: #ffffff;
+            box-shadow: 0 12px 24px -12px rgba(0,65,102,0.15);
+        }
+
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 18px;
+        }
+
+        .card h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #4f6579;
+            font-size: 15px;
+            margin-bottom: 22px;
+            line-height: 1.4;
+        }
+
+        .card-link {
+            font-weight: 600;
+            color: #1A2A3A;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid #FFD600;
+            padding-bottom: 4px;
+        }
+
+        .card-link i {
+            font-size: 14px;
+        }
+
+        .telegram-comment {
+            background: #EAF4FF;
+            border-radius: 24px;
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 24px 0 20px;
+            border-left: 8px solid #2AABEE;
+        }
+
+        .telegram-comment p {
+            font-weight: 500;
+            font-size: 17px;
+        }
+
+        .telegram-comment i {
+            color: #2AABEE;
+            margin-right: 8px;
+            font-size: 22px;
+        }
+
+        .btn-outline {
+            background: white;
+            border: 1px solid #b3c9db;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #1f3a4b;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: #e6edf6;
+        }
+
+        /* слайдер с новыми фотографиями (теперь точно фото) */
+        .slider-section {
+            background: white;
+            border-radius: 40px;
+            padding: 32px 36px;
+            margin-bottom: 32px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.04);
+        }
+
+        .slider-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .slider-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slider-wrapper {
+            overflow: hidden;
+            border-radius: 32px;
+            width: 100%;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 260px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 24px;
+            display: flex;
+            align-items: flex-end;
+            padding: 32px;
+            color: white;
+            font-weight: 700;
+            font-size: 28px;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.5);
+            box-shadow: inset 0 -50px 50px -20px rgba(0,0,0,0.4);
+        }
+
+        /* Заменяем на реальные фото (unsplash тематические: математика, экзамен, учеба) */
+        .slide1 { background-image: linear-gradient(0deg, rgba(10,30,50,0.6), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2070&auto=format&fit=crop'); }
+        .slide2 { background-image: linear-gradient(0deg, rgba(40,20,30,0.6), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1932&auto=format&fit=crop'); }  <!-- студенты, книги -->
+        .slide3 { background-image: linear-gradient(0deg, rgba(20,40,40,0.7), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2070&auto=format&fit=crop'); } <!-- пишущий человек, экзамен -->
+
+        .slider-arrow {
+            background: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 14px rgba(0,10,20,0.1);
+            cursor: pointer;
+            border: none;
+            font-size: 20px;
+            color: #1f3a4b;
+            transition: 0.1s;
+            flex-shrink: 0;
+        }
+
+        .slider-arrow:hover {
+            background: #FFD600;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #cbd6e2;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .dot.active {
+            width: 30px;
+            background: #1A2A3A;
+        }
+
+        /* форма обратной связи */
+        .feedback-section {
+            background: white;
+            border-radius: 40px;
+            padding: 36px;
+            margin-bottom: 20px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.04);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #1f3a4b;
+            font-size: 15px;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            padding: 16px 22px;
+            border: 1px solid #d9e1ea;
+            border-radius: 28px;
+            font-size: 16px;
+            background: #F9FAFD;
+            transition: 0.15s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1A2A3A;
+            background: #ffffff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+            border-radius: 32px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .policy {
+            font-size: 14px;
+            color: #6a7e91;
+            margin: 24px 0 16px;
+        }
+
+        .policy a {
+            color: #1A2A3A;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .btn-submit {
+            background: #1A2A3A;
+            border: none;
+            color: white;
+            padding: 18px 48px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 8px 16px rgba(0,30,50,0.15);
+        }
+
+        .btn-submit:hover {
+            background: #0f1e2b;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 32px;
+            color: #6d8ba5;
+            font-size: 14px;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #e2eaf1;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- ЦВЕТНАЯ ШАПКА (под гамму сайта) -->
+    <div class="colored-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <div class="logo-icon"><i class="fas fa-calculator"></i></div>
+                <span class="logo-text">ЕГЭ Профиль • Репетитор AI</span>
+            </div>
+            <div class="header-menu">
+                <span><i class="fas fa-book-open"></i> Курсы</span>
+                <span><i class="fas fa-user-graduate"></i> Задания</span>
+                <span><i class="fas fa-comment-dots"></i> Отзывы</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- баннер "План на любой балл" -->
+        <div class="plan-banner">
+            <div class="plan-text">
+                <h2>📘 План на любой балл</h2>
+                <p><i class="fas fa-check-circle"></i> Выбери стратегию подготовки и занимайся с Репетитором AI</p>
+            </div>
+            <button class="btn-primary">Подарить себе план →</button>
+        </div>
+
+        <!-- Блок с номерами заданий (ТЕПЕРЬ 19) -->
+        <div class="tasks-section">
+            <div class="section-header">
+                <h3>📝 Решайте задания с Репетитором AI</h3>
+                <span class="badge">Одно или несколько, любой сложности</span>
+            </div>
+            <div class="numbers-grid">
+                <!-- номера 1..19, некоторые выделены активными (1,7,13,19) для демо -->
+                <span class="number-item active">1</span><span class="number-item">2</span><span class="number-item">3</span><span class="number-item">4</span>
+                <span class="number-item">5</span><span class="number-item">6</span><span class="number-item active">7</span><span class="number-item">8</span>
+                <span class="number-item">9</span><span class="number-item">10</span><span class="number-item">11</span><span class="number-item">12</span>
+                <span class="number-item active">13</span><span class="number-item">14</span><span class="number-item">15</span><span class="number-item">16</span>
+                <span class="number-item">17</span><span class="number-item">18</span><span class="number-item active">19</span>
+            </div>
+            <div class="type-selector">
+                <div class="type-tag"><i class="fas fa-tasks"></i> Выберите задание</div>
+                <div class="type-tag"><i class="fas fa-layer-group"></i> Все типы заданий</div>
+            </div>
+        </div>
+
+        <!-- Подборки / пробные варианты (три карточки) -->
+        <div class="resources">
+            <div class="card">
+                <div class="card-icon">📚</div>
+                <h4>Подборки заданий от Яндекс Учебника</h4>
+                <p>Чтобы точно разобраться</p>
+                <a href="#" class="card-link">Открыть <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="card" style="background:#E9F2FA;">
+                <div class="card-icon">💬</div>
+                <h4>Обсуждайте задания с другими учениками!</h4>
+                <p>Теперь у нас есть свой комментарий в Telegram</p>
+                <a href="#" class="card-link">Открыть <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="card">
+                <div class="card-icon">📝</div>
+                <h4>Пробные варианты</h4>
+                <p>Как на настоящем экзамене</p>
+                <a href="#" class="card-link">Открыть <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- телеграм блок -->
+        <div class="telegram-comment">
+            <p><i class="fab fa-telegram-plane"></i> <strong>Чат учеников</strong> — обсуждайте задачи, делись опытом</p>
+            <button class="btn-outline"><i class="fab fa-telegram"></i> Открыть комментарий в Telegram</button>
+        </div>
+
+        <!-- СЛАЙДЕР ФОТО (РЕАЛЬНЫЕ ФОТОГРАФИИ) -->
+        <div class="slider-section">
+            <div class="slider-title">
+                <i class="fas fa-images" style="color:#1A2A3A;"></i> Фотогалерея: подготовка к ЕГЭ
+            </div>
+            <div class="slider-container">
+                <button class="slider-arrow" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
+                <div class="slider-wrapper">
+                    <div class="slides" id="slides">
+                        <div class="slide slide1">⚡ Математика с репетитором</div>
+                        <div class="slide slide2">📖 Групповые интенсивы</div>
+                        <div class="slide slide3">✍️ Пишем пробный экзамен</div>
+                    </div>
+                </div>
+                <button class="slider-arrow" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="slider-dots" id="sliderDots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <!-- ФОРМА ОБРАТНОЙ СВЯЗИ (имя, фамилия, email, телефон, комментарий) -->
+        <div class="feedback-section">
+            <h3 style="font-size: 28px; margin-bottom: 28px; font-weight: 700;">📬 Свяжитесь с нами</h3>
+            <form id="feedbackForm" onsubmit="event.preventDefault(); alert('Форма отправлена (демо-режим). Спасибо! Мы свяжемся с вами.');">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" placeholder="Иван" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Фамилия</label>
+                        <input type="text" placeholder="Петров" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="ivan@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        <input type="tel" placeholder="+7 (999) 123-45-67" required>
+                    </div>
+                </div>
+                <div class="form-group full-width">
+                    <label>Комментарий</label>
+                    <textarea placeholder="Ваш вопрос или пожелание..."></textarea>
+                </div>
+                <div class="policy">
+                    Нажимая кнопку «Решать», вы подтверждаете согласие с полным текстом <a href="#">условия</a>.
+                </div>
+                <button type="submit" class="btn-submit"><i class="fas fa-paper-plane" style="margin-right: 10px;"></i>Решать</button>
+            </form>
+        </div>
+
+        <hr>
+        <footer>
+            <p>✏️ Сервис подготовки к ЕГЭ • Репетитор AI — слайдер фото, 19 заданий, цветная шапка.</p>
+        </footer>
+    </div>
+
+    <!-- Простой JS для слайдера -->
+    <script>
+        (function() {
+            const slides = document.getElementById('slides');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.getElementById('prevSlide');
+            const nextBtn = document.getElementById('nextSlide');
+            let currentIndex = 0;
+            const totalSlides = document.querySelectorAll('.slide').length;
+
+            function updateSlide(index) {
+                if (index < 0) index = totalSlides - 1;
+                if (index >= totalSlides) index = 0;
+                currentIndex = index;
+                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            prevBtn.addEventListener('click', () => updateSlide(currentIndex - 1));
+            nextBtn.addEventListener('click', () => updateSlide(currentIndex + 1));
+            dots.forEach((dot, idx) => {
+                dot.addEventListener('click', () => updateSlide(idx));
+            });
+        })();
+    </script>
+
+    <!-- имитация интерактивности (кнопки заданий уже увеличиваются) -->
+</body>
+</html>

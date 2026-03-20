@@ -504,6 +504,73 @@
             background: #0f1e2b;
         }
 
+        /* НОВЫЙ БЛОК: карта + контакты */
+        .map-contact {
+            background: white;
+            border-radius: 40px;
+            padding: 36px;
+            margin: 20px 0 30px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.04);
+        }
+
+        .map-contact h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 28px;
+        }
+
+        .map-contact .map-wrapper {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .map-contact .map-wrapper img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 32px;
+            border: 2px solid #e2eaf1;
+            transition: transform 0.2s;
+        }
+
+        .map-contact .map-wrapper img:hover {
+            transform: scale(1.01);
+            box-shadow: 0 10px 30px rgba(0,40,70,0.15);
+        }
+
+        .contact-info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: space-around;
+            margin-top: 16px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            background: #F9FAFD;
+            padding: 16px 24px;
+            border-radius: 60px;
+            border: 1px solid #eef2f6;
+        }
+
+        .contact-item i {
+            font-size: 24px;
+            color: #1A2A3A;
+        }
+
+        .contact-item a {
+            color: #1f3a4b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
         footer {
             text-align: center;
             margin-top: 32px;
@@ -650,9 +717,33 @@
             </form>
         </div>
 
+        <!-- НОВЫЙ БЛОК: карта и контакты -->
+        <div class="map-contact">
+            <h3>🗺️ Наше местоположение</h3>
+            <div class="map-wrapper">
+                <a href="https://yandex.ru/maps/?um=constructor%3A59f6bff39118e77e6517aab476b0fc542a81011175d88bd85d631b3bb4ac2fc4&amp;source=constructorStatic" target="_blank">
+                    <img src="https://api-maps.yandex.ru/services/constructor/1.0/static/?um=constructor%3A59f6bff39118e77e6517aab476b0fc542a81011175d88bd85d631b3bb4ac2fc4&amp;width=500&amp;height=400&amp;lang=ru_RU" alt="Карта проезда" style="border: 0;">
+                </a>
+            </div>
+            <div class="contact-info-grid">
+                <div class="contact-item">
+                    <i class="fas fa-map-pin"></i>
+                    <span>г. Магнитогорск, ул. Карла Маркса, д. 141/4</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <a href="tel:+74951234567">+7 (777) 777-77-77</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:info@ege-ai.ru">info@ege-ai.ru</a>
+                </div>
+            </div>
+        </div>
+
         <hr>
         <footer>
-            <p>✏️ Сервис подготовки к ЕГЭ • Репетитор AI — слайдер фото, 19 заданий, цветная шапка.</p>
+            <p>✏️ Сервис подготовки к ЕГЭ • Репетитор AI — слайдер фото, 19 заданий, цветная шапка, карта проезда.</p>
         </footer>
     </div>
 
@@ -683,7 +774,5 @@
             });
         })();
     </script>
-
-    <!-- имитация интерактивности (кнопки заданий уже увеличиваются) -->
 </body>
 </html>
